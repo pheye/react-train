@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React Test</title>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+    <!-- babel是解析JSX必备的库 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Header extends React.Component {
+            render () {
+                return <div style={{backgroundColor: '#80bde8', overflow: 'hidden'}}>
+                    {this.props.children}
+                    </div>
+            }
+        }
+        class Content extends React.Component {
+            render () {
+                return (
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                        <div style={{display: 'flex', flex: 1, backgroundColor: '#41a2e6'}}>
+                            {this.props.left}
+                        </div>    
+                        <div style={{display: 'flex', flex: 3, backgroundColor: '#1f90e6'}}>
+                            {this.props.right}
+                        </div>
+                    </div>
+                )
+            }
+        }
+        class Footer extends React.Component {
+            render () {
+                return <div style={{textAlign: 'center', backgroundColor: '#80bde8'}}>
+                    {this.props.children}
+                    </div>
+            }
+        }
+        class App extends React.Component {
+            render () {
+                return <div>
+                    <Header>
+                        <h2 style={{textAlign: 'center'}}>Github热门项目</h2>
+                    </Header>
+                    <Content left={<h2>菜单</h2>} right={<h2>内容</h2>}/>
+                    <Footer>
+                        <span>版权所有 &copy; LIUWENCAN</span>
+                    </Footer>
+                    </div>;
+            }
+        }
+        ReactDOM.render( 
+        <App />,
+        document.getElementById('container')
+        );
+    </script>
+</body>
+
+</html>
