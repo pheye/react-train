@@ -1,7 +1,7 @@
-import "@babel/polyfill";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import InfiniteScroll from 'react-infinite-scroller';
 
 const styles = {
     center: {
@@ -67,7 +67,7 @@ const styles = {
         display: 'inline-flex',
         width: '16px',
         justifyContent: 'center'
-    }
+    },
 };
 
 class Loading extends React.Component {
@@ -108,7 +108,7 @@ class Menu extends React.Component {
 
         // 现在样式变内联了，如何实现:hover, :active的功能？
         const children = links.map((item, key) => 
-            <li style={styles.navItem}><a href="#" onClick={() => onClick(item.query)} style={current == item.query ? {'color': 'red'} : {color: 'black'}}>{item.title}</a></li>
+            <li style={styles.navItem} key={key}><a href="#" onClick={() => onClick(item.query)} style={current == item.query ? {'color': 'red'} : {color: 'black'}}>{item.title}</a></li>
         );
         return <ul style={styles.nav}>
         {children}
@@ -131,18 +131,18 @@ class Card extends React.Component {
                 {source.full_name}
             </a></h4>
             <div>
-                <i class="fa fa-user" style={{...styles.icon, color: 'rgb(255, 191, 116)'}}></i><a href={source.owner.html_url} target="_blank">
+                <i className="fa fa-user" style={{...styles.icon, color: 'rgb(255, 191, 116)'}}></i><a href={source.owner.html_url} target="_blank">
                 {source.name}
                 </a>
             </div>
             <div>
-                <i class="fa fa-star" style={{...styles.icon, color: 'rgb(255, 215, 0)' }}></i>{source.stargazers_count} stars
+                <i className="fa fa-star" style={{...styles.icon, color: 'rgb(255, 215, 0)' }}></i>{source.stargazers_count} stars
         </div>
             <div>
-                <i class="fa fa-code-fork" style={{...styles.icon, color: 'rgb(129, 195, 245)' }}></i>{source.forks} forks
+                <i className="fa fa-code-fork" style={{...styles.icon, color: 'rgb(129, 195, 245)' }}></i>{source.forks} forks
         </div>
             <div>
-                <i class="fa fa-warning" style={{...styles.icon, color: 'rgb(241, 138, 147)' }}></i>{source.open_issues} Open issues
+                <i className="fa fa-warning" style={{...styles.icon, color: 'rgb(241, 138, 147)' }}></i>{source.open_issues} Open issues
         </div>
         </div>
     }
@@ -164,6 +164,7 @@ class Content extends React.Component {
         super(props);
         this.state = {
             loading: false,
+            end: false,
             items: []
         };
     }
@@ -175,30 +176,44 @@ class Content extends React.Component {
             this.search();
         }
     }
-    search = async () => {
+    search = async (page = 1) => {
         const {query} = this.props;
-        const url = `https://api.github.com/search/repositories?q=${query}&sort=stars&order=desc&type=Repositories`;
+        const url = `https://api.github.com/search/repositories?q=${query}&sort=stars&order=desc&type=Repositories&page=${page}`;
         console.log('url', url);
         this.setState({ loading: true })
         try {
             const res = await axios.get(url)
             console.log('res', res.data)
-            this.setState({
-                items: res.data.items
-            })
+            this.setState((state) => ({
+                items: [...state.items, ...res.data.items]
+            }))
         } catch (e) {
             console.log('error', e)
+            this.setState({
+              end: true
+            });
         }
         this.setState({ loading: false });
     }
     render() {
-        const { items, loading } = this.state;
+        const { items, loading, end } = this.state;
         const cards = items.map((item, key) =>
             <Card key={key} source={item} index={key + 1}></Card>
         );
-        return <div style={styles.content}>
-            {loading ? <Loading></Loading> : cards}
-        </div>;
+        return (
+          <InfiniteScroll
+            initialLoad={false}
+            pageStart={1}
+            loadMore={this.search}
+            hasMore={!loading || end}
+            loader={null}
+          >
+            <div style={styles.content}>
+              {cards}
+            </div>
+            {loading && <Loading />}
+          </InfiniteScroll>)
+        ;
     }
 }
 
