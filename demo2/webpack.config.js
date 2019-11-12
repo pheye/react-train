@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
+ mode: 'development',
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
@@ -10,9 +10,15 @@ module.exports = {
   module: {
     rules: [
       { 
-      test: /\.js$/, 
-      exclude: /node_modules/,
-      use: 'babel-loader'
+        test: /\.js$/, 
+        exclude: /node_modules/,
+        enforce: 'pre',
+        use: 'eslint-loader'
+      },
+      { 
+        test: /\.js$/, 
+        exclude: /node_modules/,
+        use: 'babel-loader'
       }
     ]
   },
