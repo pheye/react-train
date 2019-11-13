@@ -5,9 +5,6 @@ import Card from "./Card";
 import Loading from "./Loading";
 
 const styles = {
-  center: {
-    textAlign: "center"
-  },
   container: {
     display: "flex",
     flexDirection: "column",

@@ -1,9 +1,6 @@
 import React from "react";
 
 const styles = {
-  center: {
-    textAlign: "center"
-  },
   card: {
     boxSizing: "border-box",
     width: "23%",
@@ -36,8 +33,8 @@ class Card extends React.Component {
     if (!source) return <div>没有卡片</div>;
     return (
       <div style={styles.card}>
-        <h2 style={styles.center}>#{index}</h2>
-        <div style={styles.center}>
+        <h2 className="text-center">#{index}</h2>
+        <div className="text-center">
           <img
             src={source.owner.avatar_url}
             alt={source.name}

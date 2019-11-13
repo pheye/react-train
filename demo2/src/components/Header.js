@@ -12,9 +12,47 @@ const styles = {
 class Header extends React.Component {
   render() {
     const { onClick, current } = this.props;
+    const links = [
+      {
+        title: "All",
+        query: "stars:>1"
+      },
+      {
+        title: "JavaScript",
+        query: "stars:>1+language:javascript"
+      },
+      {
+        title: "Ruby",
+        query: "stars:>1+language:ruby"
+      },
+      {
+        title: "Java",
+        query: "stars:>1+language:java"
+      },
+      {
+        title: "CSS",
+        query: "stars:>1+language:css"
+      }
+    ];
+    const navs = [
+      {
+        title: "Popular",
+        query: "#"
+      },
+      {
+        title: "Battle",
+        query: "#battle"
+      }
+    ];
+
     return (
       <div style={styles.header}>
-        <Menu onClick={onClick} current={current} />
+        <div>
+          <Menu links={navs} />
+        </div>
+        <div>
+          <Menu onClick={onClick} current={current} links={links} />
+        </div>
       </div>
     );
   }

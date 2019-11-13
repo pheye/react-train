@@ -14,29 +14,7 @@ const styles = {
 // 这里是所有普通的Components组件
 class Menu extends React.Component {
   render() {
-    const { onClick, current } = this.props;
-    const links = [
-      {
-        title: "All",
-        query: "stars:>1"
-      },
-      {
-        title: "JavaScript",
-        query: "stars:>1+language:javascript"
-      },
-      {
-        title: "Ruby",
-        query: "stars:>1+language:ruby"
-      },
-      {
-        title: "Java",
-        query: "stars:>1+language:java"
-      },
-      {
-        title: "CSS",
-        query: "stars:>1+language:css"
-      }
-    ];
+    const { onClick, current, links } = this.props;
 
     // 现在样式变内联了，如何实现:hover, :active的功能？
     const children = links.map((item, key) => (

@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = function(env, argv) {
   const isEnvDevelopment = argv.mode === 'development' || !argv.mode;
@@ -14,6 +15,13 @@ module.exports = function(env, argv) {
     },
     module: {
       rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader', 
+          'css-loader'
+          ]
+      },
       { 
         test: /\.js$/, 
         exclude: /node_modules/,
@@ -25,6 +33,11 @@ module.exports = function(env, argv) {
         exclude: /node_modules/,
         use: 'babel-loader'
       }]
-    }
+    },
+   plugins: [
+     new HtmlWebpackPlugin({
+       template: 'public/index.html'
+     })
+   ],
   };
 }
