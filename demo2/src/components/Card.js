@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 const styles = {
   center: {
@@ -46,7 +45,7 @@ class Card extends React.Component {
           />
         </div>
         <h4 style={styles.cardTitle}>
-          <a href={source.html_url} target="_blank">
+          <a href={source.html_url} target="_blank" rel="noopener noreferrer">
             {source.full_name}
           </a>
         </h4>
@@ -55,7 +54,11 @@ class Card extends React.Component {
             className="fa fa-user"
             style={{ ...styles.icon, color: "rgb(255, 191, 116)" }}
           />
-          <a href={source.owner.html_url} target="_blank">
+          <a
+            href={source.owner.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {source.name}
           </a>
         </div>
