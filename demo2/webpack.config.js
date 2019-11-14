@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = function(env, argv) {
   const isEnvDevelopment = argv.mode === "development" || !argv.mode;
@@ -49,7 +50,10 @@ module.exports = function(env, argv) {
       ]
     },
     plugins: [
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
+        title: 'Github热门项目',
+        favicon: 'public/favicon.png',
         template: "public/index.html"
       })
     ]

@@ -31,6 +31,7 @@ class Content extends React.Component {
     this.state = {
       loading: false,
       end: false,
+      page: 1,
       items: []
     };
   }
@@ -41,12 +42,13 @@ class Content extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.query !== prevProps.query) {
-      this.search();
+      this.search(true);
     }
   }
 
-  search = async (page = 1) => {
+  search = async (clear = false) => {
     const { query } = this.props;
+    const page = clear ? 1 : this.state.page;
     const url = `https://api.github.com/search/repositories?q=${query}&sort=stars&order=desc&type=Repositories&page=${page}`;
     console.log("url", url);
     this.setState({ loading: true });
@@ -54,7 +56,8 @@ class Content extends React.Component {
       const res = await axios.get(url);
       console.log("res", res.data);
       this.setState(state => ({
-        items: [...state.items, ...res.data.items]
+        items: clear ? res.data.items : [...state.items, ...res.data.items],
+        page: clear ? 1 : state.page + 1
       }));
     } catch (e) {
       console.log("error", e);
@@ -73,8 +76,7 @@ class Content extends React.Component {
     return (
       <InfiniteScroll
         initialLoad={false}
-        pageStart={1}
-        loadMore={this.search}
+        loadMore={() => this.search(false)}
         hasMore={!loading || end}
         loader={null}
       >
