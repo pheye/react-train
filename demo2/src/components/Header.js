@@ -4,7 +4,7 @@ import Menu from "./Menu";
 const styles = {
   header: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "center"
   }
 };
