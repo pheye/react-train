@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = function(env, argv) {
   const isEnvDevelopment = argv.mode === "development" || !argv.mode;
@@ -18,6 +19,7 @@ module.exports = function(env, argv) {
     },
     devServer: {
       contentBase: './dist',
+      hot: true,
     },
     module: {
       rules: [
@@ -55,7 +57,14 @@ module.exports = function(env, argv) {
         title: 'Github热门项目',
         favicon: 'public/favicon.png',
         template: "public/index.html"
-      })
-    ]
+      }),
+      new webpack.NamedModulesPlugin(),
+      new webpack.HotModuleReplacementPlugin()
+    ],
+    resolve: {
+      alias: {
+        '@': path.resolve('src')
+      }
+    }
   };
 };

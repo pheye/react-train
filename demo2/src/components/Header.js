@@ -11,7 +11,7 @@ const styles = {
 
 class Header extends React.Component {
   render() {
-    const { onClick, current } = this.props;
+    const { onClick, current, changeRouter } = this.props;
     const links = [
       {
         title: "All",
@@ -37,18 +37,18 @@ class Header extends React.Component {
     const navs = [
       {
         title: "Popular",
-        query: "#"
+        query: "/"
       },
       {
         title: "Battle",
-        query: "#battle"
+        query: "/battle"
       }
     ];
 
     return (
       <div style={styles.header}>
         <div>
-          <Menu links={navs} />
+          <Menu links={navs} onClick={changeRouter} />
         </div>
         <div>
           <Menu onClick={onClick} current={current} links={links} />

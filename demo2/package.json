@@ -33,6 +33,7 @@
     "prettier": "^1.19.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-hot-loader": "^4.12.17",
     "react-infinite-scroller": "^1.2.4",
     "schema-utils": "^2.5.0",
     "source-map-explorer": "^2.1.0",
