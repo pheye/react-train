@@ -14,6 +14,8 @@ module.exports = {
     "jsx-a11y/anchor-is-valid": 0,
     "react/destructuring-assignment": 0,
     "react/jsx-one-expression-per-line": 0,
-    "import/no-unresolved": [2, { ignore: ["^@/"] }]
+    "import/no-unresolved": [2, { ignore: ["^@/"] }],
+    "react/self-closing-comp": 0,
+    "react/jsx-closing-tag-location": 0
   }
 };

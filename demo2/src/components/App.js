@@ -11,7 +11,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     flex: 1,
-    padding: 0,
+    padding: "0 32px",
     margin: 0,
     minHeight: "100vh"
   }

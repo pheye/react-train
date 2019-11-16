@@ -5,7 +5,8 @@ const styles = {
   header: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginTop: "32px"
   }
 };
 
@@ -48,7 +49,7 @@ class Header extends React.Component {
     return (
       <div style={styles.header}>
         <div>
-          <Menu links={navs} onClick={changeRouter} />
+          <Menu links={navs} onClick={changeRouter} current={navs[0].query} />
         </div>
         <div>
           <Menu onClick={onClick} current={current} links={links} />

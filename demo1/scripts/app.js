@@ -7,7 +7,8 @@ const styles = {
         flexDirection: 'column',
         flex: 1,
         padding: 0,
-        margin: 0,
+        marginLeft: '32px',
+        marginRight: '32px',
         minHeight: '100vh'
     },
     nav: {
