@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
-    "build": "webpack --mode production",
+    "build": "webpack --config webpack.prod.js --mode production",
     "watch": "webpack --watch"
   },
   "dependencies": {
@@ -32,9 +32,11 @@
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "lint-staged": "^9.4.2",
+    "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.0",
     "normalize.css": "^8.0.1",
     "postcss-loader": "^3.0.0",
+    "postcss-normalize": "^8.0.1",
     "prettier": "^1.19.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -44,6 +46,7 @@
     "schema-utils": "^2.5.0",
     "source-map-explorer": "^2.1.0",
     "style-loader": "^1.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^2.2.0",
     "webpack-dev-server": "^3.9.0"
   },
