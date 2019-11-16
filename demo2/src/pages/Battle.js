@@ -25,19 +25,19 @@ class Battle extends React.Component {
       <div>
         <h2 className="text-center">Instructions</h2>
         <div className="row">
-          <div className="column xs-4">
+          <div className="column xs-4 right">
             <div>Enter two Github users</div>
             <div>
               <i className="fa fa-users fa-4x" />
             </div>
           </div>
-          <div className="column xs-4">
+          <div className="column xs-2">
             <div>Battle</div>
             <div>
               <i className="fa fa-fighter-jet fa-4x" />
             </div>
           </div>
-          <div className="column xs-4">
+          <div className="column xs-4 left">
             <div>See the winner</div>
             <div>
               <svg
