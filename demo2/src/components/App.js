@@ -4,7 +4,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Content from "./Content";
 import Popular from "@/pages/Popular";
-import Battle from "@/pages/Battle";
 
 const styles = {
   container: {
@@ -33,12 +32,16 @@ class App extends React.Component {
     });
   };
 
-  changeRouter = query => {
+  changeRouter = async query => {
     console.log("query", query);
+    let module = null;
     switch (query) {
       case "/battle":
+        module = await import(
+          /* webpackChunkName: "Battle" */ "@/pages/Battle"
+        );
         this.setState({
-          router: Battle
+          router: module.default
         });
         break;
       case "/":

@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = function(env, argv) {
   const isEnvDevelopment = argv.mode === "development" || !argv.mode;
@@ -15,12 +16,8 @@ module.exports = function(env, argv) {
       : isEnvDevelopment && "cheap-module-source-map",
     entry: "./src/index.js",
     output: {
-      filename: "bundle.js",
+      filename: "[name].[contenthash:8].js",
       path: path.resolve(__dirname, "dist")
-    },
-    devServer: {
-      contentBase: './dist',
-      hot: true,
     },
     module: {
       rules: [
@@ -102,17 +99,37 @@ module.exports = function(env, argv) {
               }                              
             : undefined                   
       )),
-      new webpack.NamedModulesPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash:8].css',
         chunkFilename: '[name].[contenthash:8].chunk.css',
       }), 
+      new BundleAnalyzerPlugin(),
     ],
     resolve: {
       alias: {
         '@': path.resolve('src')
       }
+    },
+    optimization: {
+      minimize: false,
+      // Automatically split vendor and commons
+      // https://twitter.com/wSokra/status/969633336732905474
+      // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
+      splitChunks: {
+        chunks: 'all',
+        name: true,
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true
+          }
+        },
+      },
     }
   };
 };
