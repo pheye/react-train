@@ -18,6 +18,7 @@ module.exports = function(env, argv) {
       path: path.resolve(__dirname, "dist")
     },
     devServer: {
+      historyApiFallback:true,
       contentBase: './dist',
       hot: true,
     },
@@ -62,7 +63,7 @@ module.exports = function(env, argv) {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          use: "babel-loader"
+          use: ["babel-loader"]
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/,

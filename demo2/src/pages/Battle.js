@@ -1,11 +1,13 @@
+import { hot } from "react-hot-loader/root";
 import React from "react";
+import classnames from "classnames";
 import styles from "./Battle.less";
 
 class Battle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      player1: "facebook",
+      player1: "",
       player2: ""
     };
   }
@@ -25,24 +27,30 @@ class Battle extends React.Component {
       <div>
         <h2 className="text-center">Instructions</h2>
         <div className="row">
-          <div className="column xs-4 right">
-            <div>Enter two Github users</div>
+          <div className="column xs-4" style={{ alignItems: "flex-end" }}>
+            <div className={styles.title}>Enter two Github:</div>
             <div>
-              <i className="fa fa-users fa-4x" />
+              <i
+                className={classnames("fa", "fa-users", styles.icon)}
+                style={{ color: "rgba(255,191,116)" }}
+              />
             </div>
           </div>
-          <div className="column xs-2">
-            <div>Battle</div>
+          <div className="column xs-2" style={{ alignItems: "center" }}>
+            <div className={styles.title}>Battle</div>
             <div>
-              <i className="fa fa-fighter-jet fa-4x" />
+              <i
+                className={classnames("fa", "fa-fighter-jet", styles.icon)}
+                style={{ color: "gray" }}
+              />
             </div>
           </div>
-          <div className="column xs-4 left">
-            <div>See the winner</div>
+          <div className="column xs-4" style={{ alignItems: "flex-start" }}>
+            <div className={styles.title}>See the winner</div>
             <div>
               <svg
                 t="1573903363815"
-                className="icon"
+                className={classnames("icon", styles.icon)}
                 viewBox="0 0 1024 1024"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -69,6 +77,7 @@ class Battle extends React.Component {
                 value={player1}
                 onChange={this.onChange.bind(this, "player1")}
                 className={styles.player__input}
+                placeholder="github username"
               />
               <button type="button" className={styles["submit-btn"]}>
                 Submit
@@ -83,6 +92,7 @@ class Battle extends React.Component {
                 value={player2}
                 onChange={this.onChange.bind(this, "player2")}
                 className={styles.player__input}
+                placeholder="github username"
               />
               <button type="button" className={styles["submit-btn"]}>
                 Submit
@@ -95,4 +105,4 @@ class Battle extends React.Component {
   }
 }
 
-export default Battle;
+export default hot(Battle);
