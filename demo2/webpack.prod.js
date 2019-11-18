@@ -4,6 +4,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');  
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = function(env, argv) {
   const isEnvDevelopment = argv.mode === "development" || !argv.mode;
@@ -77,33 +79,27 @@ module.exports = function(env, argv) {
     },
     plugins: [
       new CleanWebpackPlugin(),
-      new HtmlWebpackPlugin(Object.assign({
+      new HtmlWebpackPlugin({
         title: 'Github热门项目',
         favicon: 'public/favicon.png',
-        template: "public/index.html"
-      }, 
-		  false	
-            ? {                              
-                minify: {                    
-                  removeComments: true,      
-                  collapseWhitespace: true,  
-                  removeRedundantAttributes: true,                                        
-                  useShortDoctype: true,     
-                  removeEmptyAttributes: true,                                            
-                  removeStyleLinkTypeAttributes: true,                                    
-                  keepClosingSlash: true,    
-                  minifyJS: true,            
-                  minifyCSS: true,           
-                  minifyURLs: true,          
-                },                           
-              }                              
-            : undefined                   
-      )),
+        template: "public/index.html",
+        minify: {                    
+          removeComments: true,      
+          collapseWhitespace: true,  
+          removeRedundantAttributes: true,                                        
+          useShortDoctype: true,     
+          removeEmptyAttributes: true,                                            
+          removeStyleLinkTypeAttributes: true,                                    
+          keepClosingSlash: true,    
+          minifyJS: true,            
+          minifyCSS: true,           
+          minifyURLs: true,          
+        },                           
+      }),
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash:8].css',
         chunkFilename: '[name].[contenthash:8].chunk.css',
       }), 
-      new BundleAnalyzerPlugin(),
     ],
     resolve: {
       alias: {
@@ -111,7 +107,11 @@ module.exports = function(env, argv) {
       }
     },
     optimization: {
-      minimize: false,
+      minimize: true,
+      minimizer: [
+        new TerserPlugin(),
+        new OptimizeCSSAssetsPlugin(),
+      ],
       // Automatically split vendor and commons
       // https://twitter.com/wSokra/status/969633336732905474
       // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
