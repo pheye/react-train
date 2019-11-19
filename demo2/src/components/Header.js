@@ -12,29 +12,8 @@ const styles = {
 
 class Header extends React.Component {
   render() {
-    const { onClick, current, changeRouter } = this.props;
-    const links = [
-      {
-        title: "All",
-        query: "stars:>1"
-      },
-      {
-        title: "JavaScript",
-        query: "stars:>1+language:javascript"
-      },
-      {
-        title: "Ruby",
-        query: "stars:>1+language:ruby"
-      },
-      {
-        title: "Java",
-        query: "stars:>1+language:java"
-      },
-      {
-        title: "CSS",
-        query: "stars:>1+language:css"
-      }
-    ];
+    const { changeRouter } = this.props;
+
     const navs = [
       {
         title: "Popular",
@@ -50,9 +29,6 @@ class Header extends React.Component {
       <div style={styles.header}>
         <div>
           <Menu links={navs} onClick={changeRouter} current={navs[0].query} />
-        </div>
-        <div>
-          <Menu onClick={onClick} current={current} links={links} />
         </div>
       </div>
     );

@@ -3,6 +3,7 @@ import axios from "axios";
 import InfiniteScroll from "react-infinite-scroller";
 import Card from "@/components/Card";
 import Loading from "@/components/Loading";
+import Menu from "@/components/Menu";
 
 const styles = {
   container: {
@@ -72,12 +73,38 @@ class Popular extends React.Component {
   };
 
   render() {
+    const { onClick, current } = this.props;
     const { items, loading, end } = this.state;
     const cards = items.map((item, key) => (
       <Card key={key} source={item} index={key + 1} />
     ));
+    const links = [
+      {
+        title: "All",
+        query: "stars:>1"
+      },
+      {
+        title: "JavaScript",
+        query: "stars:>1+language:javascript"
+      },
+      {
+        title: "Ruby",
+        query: "stars:>1+language:ruby"
+      },
+      {
+        title: "Java",
+        query: "stars:>1+language:java"
+      },
+      {
+        title: "CSS",
+        query: "stars:>1+language:css"
+      }
+    ];
     return (
       <div>
+        <div>
+          <Menu onClick={onClick} current={current} links={links} />
+        </div>
         <InfiniteScroll
           initialLoad={false}
           loadMore={() => this.search(false)}

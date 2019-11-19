@@ -38,7 +38,7 @@ class App extends React.Component {
     switch (query) {
       case "/battle":
         module = await import(
-          /* webpackChunkName: "Battle" */ "@/pages/Battle"
+          /* webpackChunkName: "Battle" */ "@/pages/Battle/index"
         );
         this.setState({
           router: module.default
@@ -59,12 +59,12 @@ class App extends React.Component {
     const Router = router;
     return (
       <div style={styles.container}>
-        <Header
-          onClick={this.onClick}
-          current={query}
-          changeRouter={this.changeRouter}
+        <Header onClick={this.onClick} changeRouter={this.changeRouter} />
+        <Content
+          router={
+            <Router query={query} current={query} onClick={this.onClick} />
+          }
         />
-        <Content router={<Router query={query} />} />
         <Footer />
       </div>
     );

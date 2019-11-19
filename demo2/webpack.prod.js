@@ -83,18 +83,7 @@ module.exports = function(env, argv) {
         title: 'Github热门项目',
         favicon: 'public/favicon.png',
         template: "public/index.html",
-        minify: {                    
-          removeComments: true,      
-          collapseWhitespace: true,  
-          removeRedundantAttributes: true,                                        
-          useShortDoctype: true,     
-          removeEmptyAttributes: true,                                            
-          removeStyleLinkTypeAttributes: true,                                    
-          keepClosingSlash: true,    
-          minifyJS: true,            
-          minifyCSS: true,           
-          minifyURLs: true,          
-        },                           
+                     
       }),
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash:8].css',

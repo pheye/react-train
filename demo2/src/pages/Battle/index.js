@@ -1,27 +1,11 @@
 import { hot } from "react-hot-loader/root";
 import React from "react";
 import classnames from "classnames";
-import styles from "./Battle.less";
+import styles from "./index.less";
+import Players from "./Players";
 
 class Battle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      player1: "",
-      player2: ""
-    };
-  }
-
-  onChange = (name, e) => {
-    console.log("e", name, e);
-    this.setState({
-      [name]: e.target.value
-    });
-  };
-
   render() {
-    const { player1, player2 } = this.state;
-
     console.log("styles", styles);
     return (
       <div>
@@ -67,39 +51,7 @@ class Battle extends React.Component {
             </div>
           </div>
         </div>
-        <h3 className="text-center">Players</h3>
-        <div className={styles["players-container"]}>
-          <div className={styles.player}>
-            <h3>Player One</h3>
-            <div className="row">
-              <input
-                type="text"
-                value={player1}
-                onChange={this.onChange.bind(this, "player1")}
-                className={styles.player__input}
-                placeholder="github username"
-              />
-              <button type="button" className={styles["submit-btn"]}>
-                Submit
-              </button>
-            </div>
-          </div>
-          <div className={styles.player}>
-            <h3>Player Two</h3>
-            <div className="row">
-              <input
-                type="text"
-                value={player2}
-                onChange={this.onChange.bind(this, "player2")}
-                className={styles.player__input}
-                placeholder="github username"
-              />
-              <button type="button" className={styles["submit-btn"]}>
-                Submit
-              </button>
-            </div>
-          </div>
-        </div>
+        <Players />
       </div>
     );
   }
