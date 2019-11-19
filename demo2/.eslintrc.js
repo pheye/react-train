@@ -16,6 +16,9 @@ module.exports = {
     "react/jsx-one-expression-per-line": 0,
     "import/no-unresolved": [2, { ignore: ["^@/"] }],
     "react/self-closing-comp": 0,
-    "react/jsx-closing-tag-location": 0
+    "react/jsx-closing-tag-location": 0,
+		"jsx-a11y/no-static-element-interactions":0,
+		"jsx-a11y/click-events-have-key-events":0,
+    "react/button-has-type":0,
   }
 };

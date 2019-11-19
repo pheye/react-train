@@ -6,20 +6,36 @@ a {
 a:hover {
   color: @primary-color;
 }
-a:hover[disabled] {
-  color: @text-color;
-}
 
 a.active {
   color: @primary-color;
 }
+
+button {
+  padding: 16px 32px;
+  border-radius: 4px;
+}
+
 button:hover {
   color: @primary-color;
   cursor: pointer;
 }
 
+button[disabled] {
+  color: @disabled-color;
+}
+
+button:hover[disabled] {
+  color: @disabled-color;
+  cursor: default;
+}
+
 .text-center {
   text-align: center;
+}
+
+.text-danger {
+  color: #a84545;
 }
 
 .row {

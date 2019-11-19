@@ -1,3 +1,5 @@
+@import "~@/styles/variable";
+
 @height: 20px;
 
 .players-container {
@@ -18,6 +20,45 @@
   font-size: 16px;
 }
 
+.player--selected {
+  display: flex;
+  flex-direction: row;
+  padding: 16px;
+  border-radius: 4px;
+  background-color: #dfdfdf;
+}
+
+.player__avatar {
+  border-radius: 16px;
+  width: 64px;
+  height: 64px;
+  margin: 0 8px;
+}
+
+.player__info {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+}
+.player__name {
+  font-size: 32px;
+  color: @primary-color;
+}
+
+.player__close--wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player__close {
+  background-color: red;
+  color: #dfdfdf;
+  border-radius: 100%;
+  padding: 8px;
+}
+
 .submit-btn {
   flex: 1;
   font-size: 16px;
@@ -36,4 +77,12 @@
   font-size: 20px;
   text-align: center;
   margin: 8px 16px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.battle__button {
+  margin: 16px 0;
 }

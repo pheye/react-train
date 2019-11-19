@@ -4,7 +4,8 @@
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack --config webpack.prod.js --mode production",
     "watch": "webpack --watch",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "lint:fix": "eslint --fix src"
   },
   "dependencies": {
     "@babel/cli": "^7.7.0",

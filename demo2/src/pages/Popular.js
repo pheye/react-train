@@ -14,6 +14,11 @@ const styles = {
     margin: 0,
     minHeight: "100vh"
   },
+  menu: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
   content: {
     display: "flex",
     flexDirection: "row",
@@ -102,7 +107,7 @@ class Popular extends React.Component {
     ];
     return (
       <div>
-        <div>
+        <div style={styles.menu}>
           <Menu onClick={onClick} current={current} links={links} />
         </div>
         <InfiniteScroll
