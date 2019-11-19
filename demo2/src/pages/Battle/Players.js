@@ -33,7 +33,8 @@ class Players extends React.Component {
       errors,
       handleSubmit,
       handleChange,
-      handleBlur
+      handleBlur,
+      onBattle
     } = this.props;
     const { player1, player2 } = this.state;
 
@@ -148,7 +149,12 @@ class Players extends React.Component {
           <div className={styles.battle__button}>
             {player1 && player2 && (
               <div className="text-center">
-                <button type="button">Battle</button>
+                <button
+                  type="button"
+                  onClick={() => onBattle(player1, player2)}
+                >
+                  Battle
+                </button>
               </div>
             )}
           </div>
