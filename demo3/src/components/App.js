@@ -36,7 +36,7 @@ class App extends React.Component {
     const { query } = this.state;
 
     return (
-      <Router>
+      <Router basename={process.env.BASE}>
         <div style={styles.container}>
           <Header onClick={this.onClick} changeRouter={this.changeRouter} />
           <Switch>

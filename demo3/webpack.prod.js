@@ -7,6 +7,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');  
 const TerserPlugin = require('terser-webpack-plugin');
 
+const base = '/react-train';
+
 module.exports = function(env, argv) {
   const isEnvDevelopment = argv.mode === "development" || !argv.mode;
   const isEnvProduction = argv.mode === "production";
@@ -20,7 +22,7 @@ module.exports = function(env, argv) {
     output: {
       filename: "[name].[contenthash:8].js",
       path: path.resolve(__dirname, "dist"),
-      publicPath: '/',
+      publicPath: `${base}/`,
     },
     module: {
       rules: [
@@ -84,11 +86,15 @@ module.exports = function(env, argv) {
         title: 'Github热门项目',
         favicon: 'public/favicon.png',
         template: "public/index.html",
+        base: '/react-train/'
       }),
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash:8].css',
         chunkFilename: '[name].[contenthash:8].chunk.css',
       }), 
+     new webpack.DefinePlugin({
+       'process.env.BASE': JSON.stringify(base)
+     })
     ],
     resolve: {
       alias: {

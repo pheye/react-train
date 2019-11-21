@@ -50,6 +50,7 @@
     "react-dom": "^16.11.0",
     "react-hot-loader": "^4.12.18",
     "react-infinite-scroller": "^1.2.4",
+    "react-router-config": "^5.1.1",
     "react-router-dom": "^5.1.2",
     "sass-loader": "^8.0.0",
     "schema-utils": "^2.5.0",
