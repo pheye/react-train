@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { parse } from "qs";
 import ResultCard from "./ResultCard";
 import Loading from "@/components/Loading";
 
@@ -33,7 +34,8 @@ class Result extends React.Component {
   }
 
   async componentDidMount() {
-    const { player1, player2 } = this.props;
+    const { location } = this.props;
+    const { player1, player2 } = parse(location.search.substring(1));
     this.init("player1", player1);
     this.init("player2", player2);
   }
@@ -45,8 +47,13 @@ class Result extends React.Component {
     });
   };
 
+  onReset = () => {
+    const { match, history } = this.props;
+    const { path } = match;
+    history.push(path);
+  };
+
   render() {
-    const { onReset } = this.props;
     const { player1, player2 } = this.state;
     if (player1.loading || player2.loading) {
       return <Loading />;
@@ -66,7 +73,7 @@ class Result extends React.Component {
           <ResultCard player={player2} type={player2.role} />
         </div>
         <div style={styles.action}>
-          <button onClick={onReset}>RESET</button>
+          <button onClick={this.onReset}>RESET</button>
         </div>
       </div>
     );

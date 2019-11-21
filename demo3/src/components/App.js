@@ -1,10 +1,13 @@
 import { hot } from "react-hot-loader/root";
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import { renderRoutes } from "react-router-config";
 import Header from "./Header";
 import Footer from "./Footer";
 import Popular from "@/pages/Popular";
-import Battle from "@/pages/Battle/index";
+import BattleContainer from "@/pages/Battle/index";
+import Battle from "@/pages/Battle/Battle";
+import Result from "@/pages/Battle/Result";
 
 const styles = {
   container: {
@@ -17,34 +20,37 @@ const styles = {
   }
 };
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      query: "stars:>1"
-    };
+const routes = [
+  {
+    path: "/",
+    exact: true,
+    component: Popular
+  },
+  {
+    path: "/battle",
+    component: BattleContainer,
+    routes: [
+      {
+        path: "/battle",
+        exact: true,
+        component: Battle
+      },
+      {
+        path: "/battle/result",
+        component: Result,
+        exact: true
+      }
+    ]
   }
+];
 
-  onClick = query => {
-    console.log("query", query);
-    this.setState({
-      query
-    });
-  };
-
+class App extends React.Component {
   render() {
-    const { query } = this.state;
-
     return (
       <Router basename={process.env.BASE}>
         <div style={styles.container}>
           <Header onClick={this.onClick} changeRouter={this.changeRouter} />
-          <Switch>
-            <Route exact path="/">
-              <Popular query={query} current={query} onClick={this.onClick} />
-            </Route>
-            <Route path="/battle" component={Battle} />
-          </Switch>
+          {renderRoutes(routes)}
           <Footer />
         </div>
       </Router>

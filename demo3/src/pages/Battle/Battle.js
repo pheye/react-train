@@ -5,9 +5,12 @@ import styles from "./index.less";
 import Players from "./Players";
 
 class Battle extends React.Component {
-  render() {
-    const { onBattle } = this.props;
+  onBattle = (player1, player2) => {
+    const { history, match } = this.props;
+    history.push(`${match.path}/result?player1=${player1}&player2=${player2}`);
+  };
 
+  render() {
     return (
       <div>
         <h2 className="text-center">Instructions</h2>
@@ -52,7 +55,7 @@ class Battle extends React.Component {
             </div>
           </div>
         </div>
-        <Players onBattle={onBattle} />
+        <Players onBattle={this.onBattle} />
       </div>
     );
   }

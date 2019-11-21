@@ -38,7 +38,8 @@ class Popular extends React.Component {
       loading: false,
       end: false,
       page: 1,
-      items: []
+      items: [],
+      query: "stars:>1"
     };
   }
 
@@ -46,14 +47,8 @@ class Popular extends React.Component {
     this.search();
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.query !== prevProps.query) {
-      this.search(true);
-    }
-  }
-
   search = async (clear = false) => {
-    const { query } = this.props;
+    const { query } = this.state;
     const page = clear ? 1 : this.state.page;
     const url = `https://api.github.com/search/repositories?q=${query}&sort=stars&order=desc&type=Repositories&page=${page}`;
     console.log("url", url);
@@ -77,9 +72,16 @@ class Popular extends React.Component {
     this.setState({ loading: false });
   };
 
+  onClick = async query => {
+    console.log("query", query);
+    await this.setState({
+      query
+    });
+    this.search(true);
+  };
+
   render() {
-    const { onClick, current } = this.props;
-    const { items, loading, end } = this.state;
+    const { items, loading, end, query } = this.state;
     const cards = items.map((item, key) => (
       <Card key={key} source={item} index={key + 1} />
     ));
@@ -108,7 +110,7 @@ class Popular extends React.Component {
     return (
       <div>
         <div style={styles.menu}>
-          <Menu onClick={onClick} current={current} links={links} />
+          <Menu onClick={this.onClick} current={query} links={links} />
         </div>
         <InfiniteScroll
           initialLoad={false}
