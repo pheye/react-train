@@ -47,7 +47,7 @@ const routes = [
 class App extends React.Component {
   render() {
     return (
-      <Router basename={process.env.BASE}>
+      <Router>
         <div style={styles.container}>
           <Header onClick={this.onClick} changeRouter={this.changeRouter} />
           {renderRoutes(routes)}
