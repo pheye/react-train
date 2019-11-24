@@ -9,7 +9,7 @@ class Footer extends React.Component {
             'Completed'
         ]
         const btns = filters.map((item, key) => 
-            <button key={key} onClick={() => onFilter(key)} style={{color: current === key ? 'red' : 'black', margin: '4px 8px'}}>{item}</button>
+            <button key={key} onClick={() => onFilter(item)} style={{color: current === item ? 'red' : 'black', margin: '4px 8px'}}>{item}</button>
         );
         return <div>
         <span>Show:</span>

@@ -20,7 +20,7 @@ class AddTodo extends React.Component {
 
         return <div>
         <input type="text" value={text}  onChange={this.onTextChange}/>
-        <button onClick={onAddTodo}>添加</button>
+        <button onClick={() => onAddTodo(text)}>添加</button>
         </div>;
     }
 }

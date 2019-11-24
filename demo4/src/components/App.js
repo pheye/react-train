@@ -1,18 +1,17 @@
 import React from 'react';
 import './App.css';
-import AddTodo from './AddTodo';
-import TodoList from './TodoList';
-import Footer from './Footer';
+import FooterContainer from '../containers/FooterContainer';
 import VisibleTodos from '../containers/VisibleTodos';
+import AddTodoContainer from '../containers/AddTodoContainer';
 
 class App extends React.Component {
 
   render () {
 
     return (<div>
-      <AddTodo/>
+      <AddTodoContainer/>
       <VisibleTodos />
-      <Footer current={0} onFilter={() => {}}/>
+      <FooterContainer/>
       </div>);
   }
 }
