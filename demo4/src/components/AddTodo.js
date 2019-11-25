@@ -13,14 +13,22 @@ class AddTodo extends React.Component {
             text: e.target.value
         })
     }
+    
+    onSubmit = (e) => {
+      const { onAddTodo } = this.props;
+      const { text } = this.state;
+      e.preventDefault();
+      onAddTodo(text);
+    }
 
     render () {
-        const { onAddTodo } = this.props;
         const { text } = this.state;
 
         return <div>
+        <form onSubmit={this.onSubmit} >
         <input type="text" value={text}  onChange={this.onTextChange}/>
-        <button onClick={() => onAddTodo(text)}>添加</button>
+        <button type="submit">添加</button>
+        </form>
         </div>;
     }
 }

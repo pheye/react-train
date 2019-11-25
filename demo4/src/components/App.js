@@ -3,6 +3,7 @@ import './App.css';
 import FooterContainer from '../containers/FooterContainer';
 import VisibleTodos from '../containers/VisibleTodos';
 import AddTodoContainer from '../containers/AddTodoContainer';
+import UndoRedo from '../containers/UndoRedo';
 
 class App extends React.Component {
 
@@ -12,6 +13,7 @@ class App extends React.Component {
       <AddTodoContainer/>
       <VisibleTodos />
       <FooterContainer/>
+      <UndoRedo/>
       </div>);
   }
 }
