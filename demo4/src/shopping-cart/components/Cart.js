@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Cart = props => {
-  const { products, subtotal, onCheckout } = props;
+  const { products, subtotal, onCheckout, loading } = props;
   const nodes = products.map((item, key) => (
     <li key={key}>
       {item.title} {item.price} x {item.quantity}
@@ -13,7 +13,7 @@ const Cart = props => {
       <ul>{nodes}</ul>
       <div>Total: {subtotal}</div>
       <div>
-        <button onClick={onCheckout}>Checkout</button>
+        <button onClick={onCheckout} disabled={subtotal <= 0.00 || loading}>Checkout</button>
       </div>
     </div>
   );

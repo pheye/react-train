@@ -10,13 +10,13 @@ const ProductList = props => {
         <span>x{item.inventory}</span>
       </div>
       <div>
-        <button onClick={() => addToCart(item.id)} disabled={!item.inventory}>Add to cart</button>
+        <button onClick={() => addToCart(item.id)} disabled={!item.inventory}>添加购物车</button>
       </div>
     </li>
   ));
   return (
     <div>
-      <h3>Products</h3>
+      <h3>产品</h3>
       <ul>
         {list}
       </ul>
