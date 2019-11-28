@@ -1,16 +1,54 @@
-import { createActions, handleActions, combineActions } from 'redux-actions';
-import shop from '../api';
+import { createActions, handleActions } from "redux-actions";
+import shop from "../api/shop";
+import { combineReducers } from "redux";
 
-const defaultState = {
-    items: [],
-    loading: false
+
+export const { setProducts, addToCart } = createActions({
+  SET_PRODUCTS: items => ({ items }),
+  ADD_TO_CART: (id) => ({id})
+});
+
+export const getAllProducts = () => dispatch => {
+  shop.getProducts(items => dispatch(setProducts(items)));
 };
 
-const { getAllProducts, setProducts } = createActions({
-    GET_ALL_PRODUCTS: () => async (dispatch) => {
-        const res = await shop.getAllProducts();
-        dispatch(setProducts(res.data));
+const byId = handleActions(
+  {
+    [setProducts]: (state, { payload: { items } }) => {
+      return {
+        ...state,
+        ...items.reduce((obj, item) => {
+          obj[item.id] = item;
+          return obj;
+        }, {})
+      };
     },
-    SET_PRODUCTS: (items) => ({items})
-})
+    [addToCart]: (state, {payload: {id}}) => {
+        const selected = state[id]
+        return {
+            ...state,
+            [id]: {...selected, inventory: selected.inventory - 1}
+        }
+    }
+  },
+  {}
+);
 
+const visibleIds = handleActions(
+  {
+    [setProducts]: (state, { payload: { items } }) => {
+      return items.map(item => item.id);
+    }
+  },
+  []
+);
+
+export const getProduct = (state, id) => state.byId[id];
+
+export const getVisibleProducts = state =>
+  state.visibleIds.map(id => getProduct(state, id));
+
+export default combineReducers({
+  byId,
+  visibleIds
+});

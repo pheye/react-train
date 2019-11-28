@@ -1,34 +1,24 @@
 import React from 'react';
-import ProductList from './ProductList';
-import Cart from './Cart';
+import { connect } from 'react-redux';
+import { getAllProducts } from '../reducers/products';
+import ProductListContainer from '../containers/ProductListContainer';
+import CartContainer from '../containers/CartContainer';
 
 class App extends React.Component {
+    componentDidMount () {
+        const { dispatch } = this.props;
+
+        dispatch(getAllProducts())
+    }
     render () {
-        const cart = {
-            subtotal: 100.0,
-            items: [
-                {
-                    title: 'T-shirt',
-                    price: 20.0,
-                    quantity: 1
-                }
-            ]
-        }
-        const products = [
-            {
-                title: 'iPAD Mini',
-                price: 1000,
-                quantity:10
-            }
-        ]
         return <div>
         <h2>购物车实例</h2>
         <hr/>
-        <ProductList products={products}/>
+        <ProductListContainer/>
         <hr/>
-        <Cart cart={cart}/>
+        <CartContainer/>
         </div>
     }
 }
 
-export default App;
+export default connect()(App);
