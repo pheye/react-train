@@ -58,12 +58,11 @@ export const getSubTotal = (state) => {
     }, 0).toFixed(2);
 }
 
-export const checkout = () => (dispatch, getState) => {
+export const checkout = () => async (dispatch, getState) => {
     const { cart } = getState();
     dispatch(checkoutRequest());
-    shop.buyProducts(cart, () => {
-        dispatch(checkoutSuccess());
-    });
+    await shop.buyProducts(cart);
+    dispatch(checkoutSuccess());
 }
 
 export default reducer;

@@ -8,8 +8,9 @@ export const { setProducts, addToCart } = createActions({
   ADD_TO_CART: (id) => ({id})
 });
 
-export const getAllProducts = () => dispatch => {
-  shop.getProducts(items => dispatch(setProducts(items)));
+export const getAllProducts = () => async (dispatch) => {
+  const res = await shop.getProducts();
+  dispatch(setProducts(res.data));
 };
 
 const byId = handleActions(

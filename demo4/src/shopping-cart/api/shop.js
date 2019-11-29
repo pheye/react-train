@@ -1,11 +1,10 @@
 /**
  * Mocking client-server processing
  */
-import _products from './products.json'
+import axios from 'axios'
 
-const TIMEOUT = 1000
 
 export default {
-  getProducts: (cb, timeout) => setTimeout(() => cb(_products), timeout || TIMEOUT),
-  buyProducts: (payload, cb, timeout) => setTimeout(() => cb(), timeout || TIMEOUT)
+  getProducts: () => axios.get('/products.json'),
+  buyProducts: (payload) => new Promise((resolve, reject) => resolve(payload)) //只是为了模拟axios.post的效果
 }
