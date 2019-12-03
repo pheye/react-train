@@ -1,4 +1,6 @@
 import React from 'react';
+import { d } from '@/utils/utils';
+import { connect } from 'dva';
 
 const ProductList = props => {
   const { products, addToCart } = props;
@@ -16,7 +18,7 @@ const ProductList = props => {
   ));
   return (
     <div>
-      <h3>产品</h3>
+      <h3>Product</h3>
       <ul>
         {list}
       </ul>
@@ -24,4 +26,9 @@ const ProductList = props => {
   );
 };
 
-export default ProductList;
+const mapStateToProps = (state) => {
+  console.log('state', state.products);
+  console.log('state', d(state, 'products'));
+  return {};
+}
+export default connect(mapStateToProps)(ProductList);

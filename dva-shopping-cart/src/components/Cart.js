@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'dva';
 
 const Cart = props => {
   const { products, subtotal, onCheckout, loading } = props;
@@ -19,4 +20,14 @@ const Cart = props => {
   );
 };
 
-export default Cart;
+const mapStateToProps = ({cart, products}) => ({
+  products: cart.added.map(id => ({...products.byId[id], quantity: cart.quantities[id]})),
+  subtotal: cart.added.reduce((amount, id) => products.byId[id].price * cart.quantities[id] + amount, 0).toFixed(2)
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  onCheckout: () => dispatch({
+    type: 'cart/checkout'
+  })
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

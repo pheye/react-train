@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'dva';
+import { d } from '../utils/utils';
 
 const ProductList = props => {
   const { products, addToCart } = props;
-  const list = products.map((item, key) => (
+  const list = (products || []).map((item, key) => (
     <li key={key}>
       <div>
         <span>{item.title}</span>{'-'}
@@ -17,7 +18,7 @@ const ProductList = props => {
   ));
   return (
     <div>
-      <h3>产品</h3>
+      <h3>Products</h3>
       <ul>
         {list}
       </ul>
@@ -25,4 +26,16 @@ const ProductList = props => {
   );
 };
 
-export default connect()(ProductList);
+const mapStateToProps = ({products}) => ({
+  products: d(products.byId, products.result)
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  addToCart: (id) => dispatch({
+    type: 'cart/add',
+    payload: {
+      id
+    }
+  })
+})
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList);
