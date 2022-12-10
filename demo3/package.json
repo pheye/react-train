@@ -45,7 +45,7 @@
     "postcss-normalize": "^8.0.1",
     "postcss-safe-parser": "^4.0.1",
     "prettier": "^1.19.1",
-    "qs": "^6.9.1",
+    "qs": "^6.9.7",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-hot-loader": "^4.12.18",
